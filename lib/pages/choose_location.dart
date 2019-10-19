@@ -7,27 +7,6 @@ class ChooseLocation extends StatefulWidget {
 
 class _ChooseLocationState extends State<ChooseLocation> {
 
-  void getData() async {
-
-    String username = await Future.delayed(Duration(seconds: 2), (){
-      return "John";
-    });
-
-    String bio = await Future.delayed(Duration(seconds: 2), (){
-      return "Vegan, musician and egg collector";
-    });
-
-    print("$username, $bio");
-
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-    print("I am not waiting for getData()");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

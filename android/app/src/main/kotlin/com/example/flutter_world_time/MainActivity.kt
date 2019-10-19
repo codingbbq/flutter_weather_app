@@ -1,4 +1,4 @@
-package com.example.flutter_weather_app
+package com.example.flutter_world_time
 
 import android.os.Bundle
 

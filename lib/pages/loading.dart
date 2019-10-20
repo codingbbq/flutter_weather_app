@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+// Custom class to get the time
 import 'package:flutter_world_time/service/WorldTime.dart';
+
+// Loading spinner
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget {
   @override
@@ -8,8 +12,6 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-
-   String time = "Loading";
 
   void setUpWorldTime() async {
     WorldTime worldtime = WorldTime(
@@ -20,9 +22,14 @@ class _LoadingState extends State<Loading> {
 
     await worldtime.getTime();
 
-    setState(() {
-      time = worldtime.time; 
+    // Once we get the time, we then navigate to Home page, we pass the necessary arguments to the home page.
+    Navigator.pushReplacementNamed(context, "/home", arguments: {
+      'location' : worldtime.location,
+      'time': worldtime.time,
+      'flag': worldtime.flag,
+      'isDayTime': worldtime.isDayTime
     });
+
   }
 
   @override
@@ -34,14 +41,13 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[900],
       body: Container(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(50.0),
-              child: Text(time),
-            )
-          ],
+        child: Center(
+          child: SpinKitRotatingCircle(
+            color: Colors.white,
+            size: 50.0,
+          ),
         ),
       ),
     );
